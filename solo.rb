@@ -1,2 +1,2 @@
-file_cache_path "./chef-solo"
-cookbook_path "./chef-repo/cookbooks"
+file_cache_path "/root/oe_chef/chef-solo"
+cookbook_path "/root/oe_chef/chef-repo/cookbooks"
