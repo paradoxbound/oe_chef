@@ -62,6 +62,13 @@ execute "sample data" do
   command "cd /var/www/openeyes && mkdir protected/config/local/ && cp protected/config/local.sample/common.sample.php protected/config/local/common.php"
 end
 
+### modules here
+
+template "/var/www/openeyes/protected/config/local/common.php" do
+  source "common.php.erb"
+  variables( :oe_modules => "OphCiExamination, OphTrOperationnote, Biometry" )
+end
+
 ## Enable mod_rew
 execute "mode rewrite" do
   command "ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/" 
