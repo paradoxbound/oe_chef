@@ -20,9 +20,9 @@
 $config = array(
 	'components' => array(
 		'db' => array(
-			'connectionString' => 'mysql:host=localhost;dbname=openeyes',
-			'username' => 'root',
-			'password' => '',
+			'connectionString' => 'mysql:host=<%= node[:maria][:oe_db_host] %>;dbname=<%= node[:maria][:oe_db_base] %>',
+			'username' => '<%= node[:maria][:oe_db_user] %>',
+			'password' => '<%= node[:maria][:oe_db_pass] %>',
 		),
 		'session' => array(
 			'timeout' => 86400

@@ -6,6 +6,8 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+
+
 include_recipe "apt"
 
 package 'apache2' do
@@ -34,10 +36,18 @@ package 'php5-ldap' do
   action :install
 end
 
+execute "maria repo" do
+  command "sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && sudo add-apt-repository 'deb http://mirror.stshosting.co.uk/mariadb/repo/5.5/ubuntu trusty main' && apt-get update"
+end
+
+package "mariadb-server" do
+  action :install
+end
 ##
 
 execute "git clone oe" do
   command "cd /var/www && git clone https://github.com/openeyes/OpenEyes.git openeyes"
+  not_if do ::File.directory?('/var/www/openeyes') end
 end
 
 ## Initialise the yii framework:
@@ -49,29 +59,56 @@ end
 ## index nad .htaccess
 execute "index and htaccess" do
   command "cd /var/www/openeyes && mv index.example.php index.php; mv .htaccess.sample .htaccess"
+  not_if do ::File.exists?('/var/www/openeyes/index.php') || ::File.exists?('/var/www/openeyes/.htaccess') end
 end
 
 ## permissions for the assets, cache and runtime directories
 execute "permission" do
   command "mkdir /var/www/openeyes/protected/runtime /var/www/openeyes/cache /var/www/openeyes/protected/cache && chmod 777 /var/www/openeyes/assets /var/www/openeyes/cache /var/www/openeyes/protected/cache /var/www/openeyes/protected/runtime"
+  not_if do ::File.directory?('/var/www/openeyes/protected/runtime') end
 end
 
 ## Cp sampl;e data
 
 execute "sample data" do
   command "cd /var/www/openeyes && mkdir protected/config/local/ && cp protected/config/local.sample/common.sample.php protected/config/local/common.php"
+  not_if do ::File.exists?('/var/www/openeyes/protected/config/local/common.php') end
 end
 
 ### modules here
 
 template "/var/www/openeyes/protected/config/local/common.php" do
   source "common.php.erb"
-  variables( :oe_modules => "OphCiExamination, OphTrOperationnote, Biometry" )
+  variables(
+    :oe_modules => "OphCiExamination, OphTrOperationnote, Biometry"
+  )
+end
+
+execute "setup database" do
+  exists = <<-EOH
+  mysql -u root -e 'show databases;' | grep #{node[:maria][:oe_db_base]}
+  EOH
+  command "mysql -u root -e 'CREATE DATABASE #{node[:maria][:oe_db_base]}; create user #{node[:maria][:oe_db_user]}; grant all on #{node[:maria][:oe_db_base]}.* to \"#{node[:maria][:oe_db_user]}\"@\"%\" identified by \"#{node[:maria][:oe_db_pass]}\";'"
+  not_if exists
+end
+
+execute "clone sample SQL" do
+  command "cd /var/www/openeyes/protected/modules/ && git clone https://github.com/openeyes/Sample.git sample"
+  not_if do ::File.directory?('/var/www/openeyes/protected/modules/sample') end
+end
+
+execute "import sample SQL" do
+  command "mysql -u#{node[:maria][:oe_db_user]} -p#{node[:maria][:oe_db_pass]} #{node[:maria][:oe_db_base]} < /var/www/openeyes/protected/modules/sample/sql/openeyes+ophtroperationbooking.sql"
+end
+
+execute "migrate db" do
+  command "php /var/www/openeyes/protected/yiic migrate --interactive=0 && php /var/www/openeyes/protected/yiic migratemodules --interactive=0 "
 end
 
 ## Enable mod_rew
 execute "mode rewrite" do
-  command "ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/" 
+  command "ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/"
+  not_if do ::File.exists?('/etc/apache2/mods-enabled/rewrite.load') end
 end
 
 service 'apache2' do
