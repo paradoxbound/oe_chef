@@ -36,6 +36,18 @@ package 'php5-ldap' do
   action :install
 end
 
+package 'php5-curl' do
+  action :install
+end
+
+package 'php5-xsl' do
+  action :install
+end
+
+package 'git' do
+  action :install
+end
+
 execute "maria repo" do
   command "sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && sudo add-apt-repository 'deb http://mirror.stshosting.co.uk/mariadb/repo/5.5/ubuntu trusty main' && apt-get update"
 end
@@ -58,7 +70,7 @@ end
 
 ## index nad .htaccess
 execute "index and htaccess" do
-  command "cd /var/www/openeyes && mv index.example.php index.php; mv .htaccess.sample .htaccess"
+  command "cd /var/www/openeyes && cp index.example.php index.php; cp .htaccess.sample .htaccess"
   not_if do ::File.exists?('/var/www/openeyes/index.php') || ::File.exists?('/var/www/openeyes/.htaccess') end
 end
 
@@ -80,7 +92,7 @@ end
 template "/var/www/openeyes/protected/config/local/common.php" do
   source "common.php.erb"
   variables(
-    :oe_modules => "OphCiExamination, OphTrOperationnote, Biometry"
+    :oe_modules => "'OphCiExamination', 'OphTrOperationnote', 'Biometry'"
   )
 end
 
@@ -92,18 +104,6 @@ execute "setup database" do
   not_if exists
 end
 
-execute "clone sample SQL" do
-  command "cd /var/www/openeyes/protected/modules/ && git clone https://github.com/openeyes/Sample.git sample"
-  not_if do ::File.directory?('/var/www/openeyes/protected/modules/sample') end
-end
-
-execute "import sample SQL" do
-  command "mysql -u#{node[:maria][:oe_db_user]} -p#{node[:maria][:oe_db_pass]} #{node[:maria][:oe_db_base]} < /var/www/openeyes/protected/modules/sample/sql/openeyes+ophtroperationbooking.sql"
-end
-
-execute "migrate db" do
-  command "php /var/www/openeyes/protected/yiic migrate --interactive=0 && php /var/www/openeyes/protected/yiic migratemodules --interactive=0 "
-end
 
 ## Enable mod_rew
 execute "mode rewrite" do
