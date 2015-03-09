@@ -1,3 +1,6 @@
 [submodule "chef-repo/cookbooks/mysql"]
 	path = chef-repo/cookbooks/mysql
 	url = https://github.com/chef-cookbooks/mysql.git
+[submodule "chef-repo/cookbooks/smf"]
+	path = chef-repo/cookbooks/smf
+	url = https://github.com/livinginthepast/smf.git
