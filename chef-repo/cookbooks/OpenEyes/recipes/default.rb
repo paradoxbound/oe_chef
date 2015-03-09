@@ -63,10 +63,9 @@ execute "sample data" do
 end
 
 ### modules here
-
-template "/var/www/openeyes/protected/config/local/common.php" do
-  source "common.php.erb"
-  variables( :oe_modules => "OphCiExamination, OphTrOperationnote, Biometry" )
+cookbook_file "common.php" do
+  path "/var/www/openeyes/protected/config/local/common.php"
+  action :create_if_missing
 end
 
 ## Enable mod_rew
