@@ -68,6 +68,13 @@ cookbook_file "common.php" do
   action :create_if_missing
 end
 
+execute "import modules" do
+  command "cd /var/www/openeyes/protected && ./yiic migratemodules"
+end
+
+## Create the vhost
+
+
 ## Enable mod_rew
 execute "mode rewrite" do
   command "ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/" 
