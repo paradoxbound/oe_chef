@@ -59,7 +59,7 @@ end
 ## Cp sampl;e data
 
 execute "sample data" do
-  command "cd /var/www/openeyes && mkdir protected/config/local/ && cp protected/config/local.sample/common.sample.php protected/config/local/common.php"
+  command "cd /var/www/openeyes && mkdir protected/config/local"
 end
 
 ### modules here
