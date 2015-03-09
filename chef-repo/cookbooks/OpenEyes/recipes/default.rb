@@ -81,8 +81,20 @@ execute "import modules" do
   command "cd /var/www/openeyes/protected && ./yiic migratemodules"
 end
 
-## Create the vhost
+# populate the db with sample data
+execute " import sample data" do
+  command "cd /tmp && git clone https://github.com/openeyes/Sample.git sample"
+end
 
+execute "populate db" do
+  command "cat /tmp/sample/sql/openeyes.sql | mysql -uroot -popeneys -D openeyes"
+end
+
+## Create the vhost
+cookbook_file "apache.conf" do
+  path "/etc/apache2/sites-available/000-default.conf"
+  action :create
+end
 
 ## Enable mod_rew
 execute "mode rewrite" do
