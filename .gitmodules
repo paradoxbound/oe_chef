@@ -7,3 +7,6 @@
 [submodule "chef-repo/cookbooks/rbac"]
 	path = chef-repo/cookbooks/rbac
 	url = https://github.com/livinginthepast/rbac
+[submodule "chef-repo/cookbooks/yum"]
+	path = chef-repo/cookbooks/yum
+	url = https://github.com/chef-cookbooks/yum-mysql-community.git
