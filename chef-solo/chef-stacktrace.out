@@ -1,11 +1,15 @@
-Generated at 2015-03-09 12:19:05 +0000
-Chef::Exceptions::CookbookNotFound: Cookbook mysql not found. If you're loading mysql from another cookbook, make sure you configure the dependency in your metadata
+Generated at 2015-03-09 12:25:50 +0000
+Chef::Exceptions::CookbookNotFound: Cookbook smf not found. If you're loading smf from another cookbook, make sure you configure the dependency in your metadata
 /usr/lib/ruby/vendor_ruby/chef/cookbook/cookbook_collection.rb:38:in `block in initialize'
 /usr/lib/ruby/vendor_ruby/ohai/mash.rb:77:in `yield'
 /usr/lib/ruby/vendor_ruby/ohai/mash.rb:77:in `default'
 /usr/lib/ruby/vendor_ruby/ohai/mash.rb:77:in `default'
 /usr/lib/ruby/vendor_ruby/chef/run_context/cookbook_compiler.rb:265:in `[]'
 /usr/lib/ruby/vendor_ruby/chef/run_context/cookbook_compiler.rb:265:in `each_cookbook_dep'
+/usr/lib/ruby/vendor_ruby/chef/run_context/cookbook_compiler.rb:243:in `add_cookbook_with_deps'
+/usr/lib/ruby/vendor_ruby/chef/run_context/cookbook_compiler.rb:244:in `block in add_cookbook_with_deps'
+/usr/lib/ruby/vendor_ruby/chef/run_context/cookbook_compiler.rb:266:in `each'
+/usr/lib/ruby/vendor_ruby/chef/run_context/cookbook_compiler.rb:266:in `each_cookbook_dep'
 /usr/lib/ruby/vendor_ruby/chef/run_context/cookbook_compiler.rb:243:in `add_cookbook_with_deps'
 /usr/lib/ruby/vendor_ruby/chef/run_context/cookbook_compiler.rb:244:in `block in add_cookbook_with_deps'
 /usr/lib/ruby/vendor_ruby/chef/run_context/cookbook_compiler.rb:266:in `each'
