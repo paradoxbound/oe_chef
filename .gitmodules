@@ -1,0 +1,3 @@
+[submodule "chef-repo/cookbooks/mysql"]
+	path = chef-repo/cookbooks/mysql
+	url = https://github.com/chef-cookbooks/mysql.git
