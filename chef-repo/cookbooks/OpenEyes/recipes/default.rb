@@ -98,9 +98,14 @@ end
 
 ## Enable mod_rew
 execute "mode rewrite" do
-  command "ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/" 
+  command "a2enmod rewrite" 
 end
 
 service 'apache2' do
   action [ :restart ]
 end
+
+execute "test mysql" do
+command "mysql -uroot -popeneyes"
+end
+
