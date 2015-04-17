@@ -65,7 +65,7 @@ execute "permission" do
   command "mkdir /var/www/openeyes/protected/runtime /var/www/openeyes/cache /var/www/openeyes/protected/cache && chmod 777 /var/www/openeyes/assets /var/www/openeyes/cache /var/www/openeyes/protected/cache /var/www/openeyes/protected/runtime"
 end
 
-## Cp sampl;e data
+## Cp sample data
 
 execute "sample data" do
   command "cd /var/www/openeyes && mkdir protected/config/local"
@@ -87,7 +87,7 @@ execute " import sample data" do
 end
 
 execute "populate db" do
-  command "cat /tmp/sample/sql/openeyes.sql | mysql -uroot -popeneys -D openeyes"
+  command "mysql -uroot -popeneys -D openeyes < /tmp/sample/sql/openeyes.sql"
 end
 
 ## Create the vhost
