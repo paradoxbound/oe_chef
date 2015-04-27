@@ -2,12 +2,11 @@
 # Cookbook Name:: OpenEyes
 # Recipe:: default
 #
-# Copyright 2015, YOUR_COMPANY_NAME
+# Copyright 2015, OpenEyes Programme
 #
 # All rights reserved - Do Not Redistribute
 #
 include_recipe "apt"
-#include_recipe "mysql"
 
 mysql_service 'openeyes' do
   version '5.5'
@@ -89,7 +88,7 @@ execute " import sample data" do
 end
 
 ## Create the db then populate it
-execute "create OpenEyes Database"
+execute "create OpenEyes Database" do
   command "mysqladmin -uroot -popeneyes -h 127.0.0.1 create openeyes"
 end
 
