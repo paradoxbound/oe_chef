@@ -1,10 +1,10 @@
-Generated at 2015-03-09 13:00:05 +0000
+Generated at 2015-04-27 09:51:32 +0000
 Mixlib::ShellOut::ShellCommandFailed: execute[populate db] (OpenEyes::default line 89) had an error: Mixlib::ShellOut::ShellCommandFailed: Expected process to exit with [0], but received '1'
----- Begin output of cat /tmp/sample/sql/openeyes.sql | mysql -uroot -popeneys -D openeyes ----
+---- Begin output of mysql -uroot -popeneys -D openeyes < /tmp/sample/sql/openeyes.sql ----
 STDOUT: 
 STDERR: ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
----- End output of cat /tmp/sample/sql/openeyes.sql | mysql -uroot -popeneys -D openeyes ----
-Ran cat /tmp/sample/sql/openeyes.sql | mysql -uroot -popeneys -D openeyes returned 1
+---- End output of mysql -uroot -popeneys -D openeyes < /tmp/sample/sql/openeyes.sql ----
+Ran mysql -uroot -popeneys -D openeyes < /tmp/sample/sql/openeyes.sql returned 1
 /usr/lib/ruby/vendor_ruby/mixlib/shellout.rb:253:in `invalid!'
 /usr/lib/ruby/vendor_ruby/mixlib/shellout.rb:239:in `error!'
 /usr/lib/ruby/vendor_ruby/chef/mixin/shell_out.rb:45:in `shell_out!'
