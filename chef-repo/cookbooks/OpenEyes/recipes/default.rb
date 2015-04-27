@@ -57,6 +57,17 @@ package 'php5-curl' do
 end
 ##
 
+## Create the db then populate it
+execute "create OpenEyes Database" do
+  command "mysqladmin -uroot -popeneyes -h 127.0.0.1 create openeyes"
+end
+
+execute "populate db" do
+  command "mysql -uroot -popeneyes -h 127.0.0.1 -D openeyes < /tmp/sample/sql/openeyes.sql"
+end
+
+# Install OpenEyes
+
 execute "git clone oe" do
   command "cd /var/www && git clone -b develop https://github.com/openeyes/OpenEyes.git openeyes"
 end
@@ -101,14 +112,6 @@ execute " import sample data" do
   command "cd /tmp && git clone https://github.com/openeyes/Sample.git sample"
 end
 
-## Create the db then populate it
-execute "create OpenEyes Database" do
-  command "mysqladmin -uroot -popeneyes -h 127.0.0.1 create openeyes"
-end
-
-execute "populate db" do
-  command "mysql -uroot -popeneyes -h 127.0.0.1 -D openeyes < /tmp/sample/sql/openeyes.sql"
-end
 
 ## Create the vhost
 cookbook_file "apache.conf" do
