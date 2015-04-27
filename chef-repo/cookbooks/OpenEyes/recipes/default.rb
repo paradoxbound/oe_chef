@@ -16,7 +16,11 @@ mysql_service 'openeyes' do
   action [:create, :start]
 end
 
-
+mysql_config 'openeyes' do
+  source 'oe_extra_settings.erb'
+  notifies :restart, 'mysql_service[openeyes]'
+  action :create
+end
 
 package 'apache2' do
   action :install
