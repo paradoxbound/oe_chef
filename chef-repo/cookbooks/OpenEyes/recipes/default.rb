@@ -123,6 +123,9 @@ end
 execute "mode rewrite" do
   command "a2enmod rewrite" 
 end
+execute "OpenEyes permission"
+  command "chown -R www-data:www-data /var/www/openeyes"
+end
 
 service 'apache2' do
   action [ :restart ]
