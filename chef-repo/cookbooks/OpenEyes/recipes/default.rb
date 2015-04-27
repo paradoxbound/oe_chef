@@ -90,7 +90,7 @@ end
 
 ## Create the db then populate it
 execute "create OpenEyes Database"
-  command "mysql -uroot -popeneyes -h 127.0.0.1 -e 'create database openeyes'"
+  command "mysql -uroot -popeneyes -h 127.0.0.1 -e \'create database openeyes\'"
 end
 
 execute "populate db" do
