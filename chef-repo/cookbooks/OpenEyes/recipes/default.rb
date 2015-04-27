@@ -62,6 +62,11 @@ execute "create OpenEyes Database" do
   command "mysqladmin -uroot -popeneyes -h 127.0.0.1 create openeyes"
 end
 
+# populate the db with sample data
+execute " import sample data" do
+  command "cd /tmp && git clone https://github.com/openeyes/Sample.git sample"
+end
+
 execute "populate db" do
   command "mysql -uroot -popeneyes -h 127.0.0.1 -D openeyes < /tmp/sample/sql/openeyes.sql"
 end
@@ -105,11 +110,6 @@ end
 
 execute "import modules" do
   command "cd /var/www/openeyes/protected && ./yiic migratemodules"
-end
-
-# populate the db with sample data
-execute " import sample data" do
-  command "cd /tmp && git clone https://github.com/openeyes/Sample.git sample"
 end
 
 
