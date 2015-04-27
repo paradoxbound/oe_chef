@@ -48,6 +48,13 @@ package 'php5-ldap' do
   action :install
 end
 
+package 'php5-xsl' do
+  action :install
+end
+
+package 'php5-curl' do
+  action :install
+end
 ##
 
 execute "git clone oe" do
