@@ -93,7 +93,7 @@ execute "create OpenEyes Database" do
 end
 
 execute "populate db" do
-  command "mysql -uroot -popeneys -h 127.0.0.1 -D openeyes < /tmp/sample/sql/openeyes.sql"
+  command "mysql -uroot -popeneyes -h 127.0.0.1 -D openeyes < /tmp/sample/sql/openeyes.sql"
 end
 
 ## Create the vhost
