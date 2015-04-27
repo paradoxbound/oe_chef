@@ -60,7 +60,7 @@ execute "install composer" do
  command "curl -s https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer"
 end
 execute "run composer" do
- command "cd /var/www && composer install"
+ command "cd /var/www/openeyes && composer install"
 end
 
 ## index nad .htaccess
