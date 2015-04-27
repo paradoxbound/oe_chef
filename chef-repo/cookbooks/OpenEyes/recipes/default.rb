@@ -109,7 +109,7 @@ cookbook_file "common.php" do
 end
 
 execute "import modules" do
-  command "cd /var/www/openeyes/protected && ./yiic migratemodules"
+  command "cd /var/www/openeyes/protected && ./yiic migratemodules --interactive=0"
 end
 
 
