@@ -9,13 +9,15 @@
 include_recipe "apt"
 #include_recipe "mysql"
 
-mysql_service 'default' do
+mysql_service 'openeyes' do
   version '5.5'
   bind_address '0.0.0.0'
   port '3306'  
   initial_root_password 'openeyes'
   action [:create, :start]
 end
+
+
 
 package 'apache2' do
   action :install
@@ -86,8 +88,13 @@ execute " import sample data" do
   command "cd /tmp && git clone https://github.com/openeyes/Sample.git sample"
 end
 
+## Create the db then populate it
+execute "create OpenEyes Database"
+  command "mysql -uroot -popeneyes -h 127.0.0.1 -e 'create database openeyes'"
+end
+
 execute "populate db" do
-  command "mysql -uroot -popeneys -D openeyes < /tmp/sample/sql/openeyes.sql"
+  command "mysql -uroot -popeneys -h 127.0.0.1 -D openeyes < /tmp/sample/sql/openeyes.sql"
 end
 
 ## Create the vhost
@@ -105,7 +112,4 @@ service 'apache2' do
   action [ :restart ]
 end
 
-execute "test mysql" do
-command "mysql -uroot -popeneyes"
-end
 
