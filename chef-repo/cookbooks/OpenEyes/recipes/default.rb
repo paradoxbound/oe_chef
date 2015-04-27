@@ -123,7 +123,7 @@ end
 execute "mode rewrite" do
   command "a2enmod rewrite" 
 end
-execute "OpenEyes permission"
+execute "OpenEyes permission" do
   command "chown -R www-data:www-data /var/www/openeyes"
 end
 
