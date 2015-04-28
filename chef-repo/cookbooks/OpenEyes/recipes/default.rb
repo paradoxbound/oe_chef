@@ -86,7 +86,7 @@ execute "run composer" do
  command "cd /var/www/openeyes && composer install"
 end
 
-## index nad .htaccess
+## index and .htaccess
 execute "index and htaccess" do
   command "cd /var/www/openeyes && mv index.example.php index.php; mv .htaccess.sample .htaccess"
 end
