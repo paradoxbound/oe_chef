@@ -192,7 +192,7 @@ execute "initialize Yii" do
 end
 
 execute "migrate Yii" do
-  command "cd /var/www/openeyes/protected; ./yii migrate --interactive=0"
+  command "cd /var/www/openeyes/protected; ./yiic migrate --interactive=0"
 end
 
 execute "import modules" do
