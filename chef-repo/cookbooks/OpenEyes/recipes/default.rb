@@ -83,7 +83,7 @@ end
 # Install OpenEyes
 
 execute "git clone oe" do
-  command "cd /var/www && git clone -b develop https://github.com/openeyes/OpenEyes.git openeyes"
+  command "cd /var/www && git clone https://github.com/openeyes/OpenEyes.git openeyes"
 end
 
 ## Install modules
