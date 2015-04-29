@@ -77,14 +77,89 @@ execute "git clone oe" do
   command "cd /var/www && git clone -b develop https://github.com/openeyes/OpenEyes.git openeyes"
 end
 
-## Initialise the yii framework:
+## Install modules
 
-execute "install composer" do
- command "curl -s https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer"
+execute "git clone OphCoCorrespondence" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphCoCorrespondence.git OphCoCorrespondence"
 end
-execute "run composer" do
- command "cd /var/www/openeyes && composer install"
+
+execute "git clone OphDrPrescription" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphDrPrescription.git OphDrPrescription"
 end
+
+execute "git clone OphTrOperationnote" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphTrOperationnote.git OphTrOperationnote"
+end
+
+execute "git clone OphCiExamination" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphCiExamination.git OphCiExamination"
+end
+
+execute "git clone OphOuAnaestheticsatisfactionaudit" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphOuAnaestheticsatisfactionaudit.git OphOuAnaestheticsatisfactionaudit"
+end
+
+execute "git clone OphLeEpatientletter" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphLeEpatientletter.git OphLeEpatientletter"
+end
+
+execute "git clone OphTrOperationbooking" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphTrOperationbooking.git OphTrOperationbooking"
+end
+
+execute "git clone OphCiPhasing" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphCiPhasing.git OphCiPhasing"
+end
+
+execute "git clone OphTrConsent" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphTrConsent.git OphTrConsent"
+end
+
+execute "git clone eyedraw" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/eyedraw.git eyedraw"
+end
+
+execute "git clone MEHCommands" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/MEHCommands.git MEHCommands"
+end
+
+execute "git clone mehpas" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/mehpas.git mehpas"
+end
+
+execute "git clone mehstaffdb" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/mehstaffdb.git mehstaffdb"
+end
+
+execute "git clone OphTrIntravitrealinjection" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphTrIntravitrealinjection.git OphTrIntravitrealinjection"
+end
+
+execute "git clone OphLeIntravitrealinjection" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphLeIntravitrealinjection.git OphLeIntravitrealinjection"
+end
+
+execute "git clone OphCoTherapyapplication" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphCoTherapyapplication.git OphCoTherapyapplication"
+end
+
+execute "git clone OphTrLaser" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphTrLaser.git OphTrLaser"
+end
+
+execute "git clone MEHBookingLogger" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/MEHBookingLogger.git MEHBookingLogger"
+end
+
+execute "git clone OphInVisualfields" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphInVisualfields.git OphInVisualfields"
+end
+
+execute "git clone PatientTicketing" do
+command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/PatientTicketing.git PatientTicketing"
+end
+
+
 
 ## index and .htaccess
 execute "index and htaccess" do
