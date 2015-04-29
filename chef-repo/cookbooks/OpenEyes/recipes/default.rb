@@ -128,17 +128,11 @@ execute "git clone eyedraw" do
 command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/eyedraw.git eyedraw"
 end
 
-execute "git clone MEHCommands" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/MEHCommands.git MEHCommands"
-end
 
 execute "git clone mehpas" do
 command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/mehpas.git mehpas"
 end
 
-execute "git clone mehstaffdb" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/mehstaffdb.git mehstaffdb"
-end
 
 execute "git clone OphTrIntravitrealinjection" do
 command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphTrIntravitrealinjection.git OphTrIntravitrealinjection"
@@ -190,6 +184,15 @@ end
 cookbook_file "common.php" do
   path "/var/www/openeyes/protected/config/local/common.php"
   action :create_if_missing
+end
+# Yii and modules
+
+execute "initialize Yii" do
+  command " cd /var/www/openeyes;  git submodule init; git submodule update"
+end
+
+execute "migrate Yii" do
+  command "cd /var/www/openeyes/protected; ./yii migrate --interactive=0"
 end
 
 execute "import modules" do
