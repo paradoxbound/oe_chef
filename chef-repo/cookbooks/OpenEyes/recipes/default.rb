@@ -73,9 +73,9 @@ end
 
 # Install OpenEyes
 
-execute "git clone oe" do
-  command "cd /var/www && git clone -b develop https://github.com/openeyes/OpenEyes.git openeyes"
-end
+#execute "git clone oe" do
+#  command "cd /var/www && git clone -b develop https://github.com/openeyes/OpenEyes.git openeyes"
+#end
 
 ## Initialise the yii framework:
 
