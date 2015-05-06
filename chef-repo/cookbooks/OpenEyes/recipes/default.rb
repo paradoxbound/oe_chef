@@ -77,11 +77,6 @@ end
 #  command "cd /var/www && git clone -b develop https://github.com/openeyes/OpenEyes.git openeyes"
 #end
 
-## Initialise the yii framework
-
-execute "initialize Yii" do
-  command " cd /var/www/openeyes;  git submodule init; git submodule update"
-end
 
 execute "install composer" do
  command "curl -s https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer"
@@ -110,6 +105,12 @@ end
 cookbook_file "common.php" do
   path "/var/www/openeyes/protected/config/local/common.php"
   action :create_if_missing
+end
+
+# Initialize Yii and modules
+
+execute "migrate Yii" do
+  command "cd /var/www/openeyes/protected; ./yiic migrate --interactive=0"
 end
 
 execute "import modules" do
