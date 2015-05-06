@@ -77,7 +77,11 @@ end
 #  command "cd /var/www && git clone -b develop https://github.com/openeyes/OpenEyes.git openeyes"
 #end
 
-## Initialise the yii framework:
+## Initialise the yii framework
+
+execute "initialize Yii" do
+  command " cd /var/www/openeyes;  git submodule init; git submodule update"
+end
 
 execute "install composer" do
  command "curl -s https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer"
