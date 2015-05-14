@@ -78,6 +78,7 @@ $config = array(
 	'modules' => array(
 	 'OphCoCorrespondence',
                 'OphDrPrescription',
+                'OphInBiometry',
                 'OphTrOperationnote',
                 'OphCiExamination' => array('class' => '\OEModule\OphCiExamination\OphCiExaminationModule'),
                 'OphOuAnaestheticsatisfactionaudit',
