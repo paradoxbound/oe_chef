@@ -55,15 +55,6 @@ end
 package 'php5-curl' do
   action :install
 end
-
-package 'libjpeg62' do
-  action :install
-end
-
-package 'wkhtmltopdf' do
-  action :install
-end
-
 ##
 
 ## Create the db then populate it
@@ -86,83 +77,14 @@ execute "git clone oe" do
   command "cd /var/www && git clone https://github.com/openeyes/OpenEyes.git openeyes"
 end
 
-## Install modules
+## Initialise the yii framework:
 
-execute "git clone OphCoCorrespondence" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphCoCorrespondence.git OphCoCorrespondence"
+execute "install composer" do
+ command "curl -s https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer"
 end
-
-execute "git clone OphDrPrescription" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphDrPrescription.git OphDrPrescription"
+execute "run composer" do
+ command "cd /var/www/openeyes && composer install"
 end
-
-execute "git clone OphTrOperationnote" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphTrOperationnote.git OphTrOperationnote"
-end
-
-execute "git clone OphCiExamination" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphCiExamination.git OphCiExamination"
-end
-
-execute "git clone OphOuAnaestheticsatisfactionaudit" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphOuAnaestheticsatisfactionaudit.git OphOuAnaestheticsatisfactionaudit"
-end
-
-execute "git clone OphLeEpatientletter" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphLeEpatientletter.git OphLeEpatientletter"
-end
-
-execute "git clone OphTrOperationbooking" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphTrOperationbooking.git OphTrOperationbooking"
-end
-
-execute "git clone OphCiPhasing" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphCiPhasing.git OphCiPhasing"
-end
-
-execute "git clone OphTrConsent" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphTrConsent.git OphTrConsent"
-end
-
-execute "git clone eyedraw" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/eyedraw.git eyedraw"
-end
-
-
-execute "git clone mehpas" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/mehpas.git mehpas"
-end
-
-
-execute "git clone OphTrIntravitrealinjection" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphTrIntravitrealinjection.git OphTrIntravitrealinjection"
-end
-
-execute "git clone OphLeIntravitrealinjection" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphLeIntravitrealinjection.git OphLeIntravitrealinjection"
-end
-
-execute "git clone OphCoTherapyapplication" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphCoTherapyapplication.git OphCoTherapyapplication"
-end
-
-execute "git clone OphTrLaser" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphTrLaser.git OphTrLaser"
-end
-
-execute "git clone MEHBookingLogger" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/MEHBookingLogger.git MEHBookingLogger"
-end
-
-execute "git clone OphInVisualfields" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/OphInVisualfields.git OphInVisualfields"
-end
-
-execute "git clone PatientTicketing" do
-command "cd /var/www/openeyes/protected/modules && git clone  https://github.com/openeyes/PatientTicketing.git PatientTicketing"
-end
-
-
 
 ## index and .htaccess
 execute "index and htaccess" do
@@ -184,15 +106,6 @@ end
 cookbook_file "common.php" do
   path "/var/www/openeyes/protected/config/local/common.php"
   action :create_if_missing
-end
-# Yii and modules
-
-execute "initialize Yii" do
-  command " cd /var/www/openeyes;  git submodule init; git submodule update"
-end
-
-execute "migrate Yii" do
-  command "cd /var/www/openeyes/protected; ./yiic migrate --interactive=0"
 end
 
 execute "import modules" do
@@ -217,5 +130,8 @@ end
 service 'apache2' do
   action [ :restart ]
 end
+
+
+
 
 
