@@ -82,7 +82,7 @@ execute "install composer" do
  command "curl -s https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer"
 end
 execute "run composer" do
- command "cd /var/www/openeyes && composer install"
+ command "cd /var/www/openeyes && composer install --require-dev=false"
 end
 
 ## index and .htaccess
