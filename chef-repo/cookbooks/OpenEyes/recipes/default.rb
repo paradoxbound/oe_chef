@@ -55,6 +55,19 @@ end
 package 'php5-curl' do
   action :install
 end
+
+package 'php5-gd'  do
+  action :install
+end
+
+package 'wkhtmltopdf' do
+  action :install
+end
+
+package 'libjpeg62' do
+  action :install 
+end
+
 ##
 
 ## Create the db then populate it
