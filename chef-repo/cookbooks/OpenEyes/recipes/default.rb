@@ -77,7 +77,7 @@ end
 
 # populate the db with sample data
 execute " import sample data" do
-  command "wget --no-check-certificate  -O /tmp/openeyes.sql  https://raw.githubusercontent.com/openeyes/Sample/master/sql/openeyes%2Bophtroperationbooking.sql"
+  command "wget --no-check-certificate  -O /tmp/openeyes.sql  https://raw.githubusercontent.com/openeyes/Sample/master/sql/openeyes.sql"
 end
 
 execute "populate db" do
