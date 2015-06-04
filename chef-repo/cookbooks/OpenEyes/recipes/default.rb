@@ -77,11 +77,11 @@ end
 
 # populate the db with sample data
 execute " import sample data" do
-  command "cd /tmp && git clone https://github.com/openeyes/Sample.git sample"
+  command "wget --no-check-certificate  -O /tmp/openeyes.sql  https://raw.githubusercontent.com/openeyes/Sample/master/sql/openeyes%2Bophtroperationbooking.sql"
 end
 
 execute "populate db" do
-  command "mysql -uroot -popeneyes -h 127.0.0.1 -D openeyes < /tmp/sample/sql/openeyes.sql"
+  command "mysql -uroot -popeneyes -h 127.0.0.1 -D openeyes < /tmp/openeyes.sql"
 end
 
 # Install OpenEyes
