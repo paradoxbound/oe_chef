@@ -81,22 +81,17 @@ $config = array(
                 'OphTrOperationnote',
                 'OphCiExamination' => array('class' => '\OEModule\OphCiExamination\OphCiExaminationModule'),
                 'OphOuAnaestheticsatisfactionaudit',
-                'OphLeEpatientletter',
                 'OphTrOperationbooking',
                 'OphCiPhasing',
                 'OphTrConsent',
                 'eyedraw',
-                'MEHCommands',
-                'mehpas',
-                'mehstaffdb',
                 'OphTrIntravitrealinjection',
                 'OphLeIntravitrealinjection',
                 'OphCoTherapyapplication',
                 'OphTrLaser',
-                'MEHBookingLogger',
                 'OphInVisualfields',
                 'PatientTicketing' => array('class' => '\OEModule\PatientTicketing\PatientTicketingModule'),
-                'deploy',
+                
 	),
 
 	'params'=>array(
