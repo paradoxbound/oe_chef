@@ -11,7 +11,7 @@ include_recipe "apt"
 mysql_service 'openeyes' do
   version '5.5'
   bind_address '0.0.0.0'
-  port '3306'  
+  port '3306'
   initial_root_password 'openeyes'
   action [:create, :start]
 end
@@ -65,7 +65,7 @@ package 'wkhtmltopdf' do
 end
 
 package 'libjpeg62' do
-  action :install 
+  action :install
 end
 
 ##
@@ -139,7 +139,7 @@ end
 
 ## Enable mod_rew
 execute "mode rewrite" do
-  command "a2enmod rewrite" 
+  command "a2enmod rewrite"
 end
 execute "OpenEyes permission" do
   command "chown -R www-data:www-data /var/www/openeyes"
@@ -150,3 +150,11 @@ service 'apache2' do
 end
 
 
+## Add cron tasks
+cron "generate_sessions" do
+  minute '0'
+  hour '2'
+  weekday '*'
+  user "root"
+  command "/var/www/openeyes/protected/yiic generateSessions"
+end
