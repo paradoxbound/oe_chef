@@ -55,6 +55,19 @@ end
 package 'php5-curl' do
   action :install
 end
+
+package 'php5-gd'  do
+  action :install
+end
+
+package 'wkhtmltopdf' do
+  action :install
+end
+
+package 'libjpeg62' do
+  action :install 
+end
+
 ##
 
 ## Create the db then populate it
@@ -64,26 +77,25 @@ end
 
 # populate the db with sample data
 execute " import sample data" do
-  command "cd /tmp && git clone https://github.com/openeyes/Sample.git sample"
+  command "wget --no-check-certificate  -O /tmp/openeyes.sql  https://raw.githubusercontent.com/openeyes/Sample/master/sql/openeyes.sql"
 end
 
 execute "populate db" do
-  command "mysql -uroot -popeneyes -h 127.0.0.1 -D openeyes < /tmp/sample/sql/openeyes.sql"
+  command "mysql -uroot -popeneyes -h 127.0.0.1 -D openeyes < /tmp/openeyes.sql"
 end
 
 # Install OpenEyes
 
-execute "git clone oe" do
-  command "cd /var/www && git clone -b develop https://github.com/openeyes/OpenEyes.git openeyes"
-end
+#execute "git clone oe" do
+#  command "cd /var/www && git clone -b develop https://github.com/openeyes/OpenEyes.git openeyes"
+#end
 
-## Initialise the yii framework:
 
 execute "install composer" do
  command "curl -s https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer"
 end
 execute "run composer" do
- command "cd /var/www/openeyes && composer install"
+ command "cd /var/www/openeyes && composer install --no-dev"
 end
 
 ## index and .htaccess
@@ -106,6 +118,12 @@ end
 cookbook_file "common.php" do
   path "/var/www/openeyes/protected/config/local/common.php"
   action :create_if_missing
+end
+
+# Initialize Yii and modules
+
+execute "migrate Yii" do
+  command "cd /var/www/openeyes/protected; ./yiic migrate --interactive=0"
 end
 
 execute "import modules" do
