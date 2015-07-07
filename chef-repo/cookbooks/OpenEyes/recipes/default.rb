@@ -66,8 +66,6 @@ end
 
 ## these packages are required for wkhtmltopdf
 
-package 'fontconfig'
-
 package 'libxrender1'
 
 package 'xfonts-base'
