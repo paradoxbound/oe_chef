@@ -60,12 +60,12 @@ package 'php5-gd'  do
   action :install
 end
 
-package 'wkhtmltopdf' do
+package 'libjpeg62' do
   action :install
 end
 
-package 'libjpeg62' do
-  action :install
+execute "install wkhtmltopdf" do
+    command "wget http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb && dpkg -i wkhtmltox-0.12.2.1_linux-trusty-amd64.deb"
 end
 
 ##
