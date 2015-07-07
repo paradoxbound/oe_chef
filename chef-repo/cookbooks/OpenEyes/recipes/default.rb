@@ -66,11 +66,13 @@ end
 
 ## these packages are required for wkhtmltopdf
 
-package 'libxrender1'
+apt_package 'fontconfig'
 
-package 'xfonts-base'
+apt_package 'libxrender1'
 
-package 'xfonts-75dpi'
+apt_package 'xfonts-base'
+
+apt_package 'xfonts-75dpi'
 
 execute "install wkhtmltopdf" do
     command "wget http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb && dpkg -i wkhtmltox-0.12.2.1_linux-trusty-amd64.deb"
