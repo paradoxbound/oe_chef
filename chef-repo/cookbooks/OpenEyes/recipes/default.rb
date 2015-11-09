@@ -109,12 +109,12 @@ end
 #end
 
 
-execute "install composer" do
- command "curl -s https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer"
-end
-execute "run composer" do
- command "cd /var/www/openeyes && composer install --no-dev"
-end
+#execute "install composer" do
+# command "curl -s https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer"
+#end
+#execute "run composer" do
+# command "cd /var/www/openeyes && composer install --no-dev"
+#end
 
 ## index and .htaccess
 execute "index and htaccess" do
